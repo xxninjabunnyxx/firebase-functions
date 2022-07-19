@@ -1,10 +1,12 @@
+import './initFirebase'
 import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
-import 'dotenv/config'
 import * as express from "express";
-
-admin.initializeApp();
+import twitterRouter from "./controllers/twitter";
 
 const app = express();
+
+app.use(express.json());
+
+app.use("/twitter", twitterRouter);
 
 export const api = functions.https.onRequest(app);
